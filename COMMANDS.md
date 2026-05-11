@@ -41,4 +41,13 @@ git:
 git init : Starts Git tracking in current project.
 git status : Shows changed and tracked project files.
 git add . : Prepares all current changes for commit.
-git commit -m "message" : Saves prepared changes with a message.
+git config --global user.name "Your Name" : Sets your Git commit name.
+git config --global user.email "you@example.com" : Sets your Git commit email.
+git add -A : Stages new, changed, and deleted files.
+git log --oneline --stat -1 : Shows latest commit and changed files.
+git ls-files : Shows files currently tracked by Git.
+git branch -M main : Renames current branch to main.
+git remote add origin URL : Connects local project to GitHub repo.
+git push -u origin main : Uploads project to GitHub first time.
+git commit -m "message" : Saves changes with a clear message.
+git push : Uploads latest commits to GitHub.
