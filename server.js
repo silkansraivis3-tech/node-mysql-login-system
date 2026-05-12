@@ -118,53 +118,39 @@ app.post("/register", async (req, res) => {
   // Get values from the register form
   const { username, email, password } = req.body;
 
-  // Check that user filled all fields
+  // If any field is empty, send user back with error message
   if (!username || !email || !password) {
-    return res.status(400).send(`
-      <p>All fields are required.</p>
-      <a href="/register.html">Go back</a>
-    `);
+    return res.redirect("/register.html?error=missing_fields");
   }
 
-  // Simple password length check
+  // If password is too short, send user back with error message
   if (password.length < 6) {
-    return res.status(400).send(`
-      <p>Password must be at least 6 characters.</p>
-      <a href="/register.html">Go back</a>
-    `);
+    return res.redirect("/register.html?error=short_password");
   }
 
   try {
-    // Hash password before saving it
-    // Number 12 is the bcrypt cost factor; higher means stronger but slower
+    // Hash password before saving it to database
     const passwordHash = await bcrypt.hash(password, 12);
 
-    // Insert new user into users table
-    // Question marks are safe placeholders for user input
+    // Save new user into MySQL users table
     await pool.execute(
       "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)",
       [username, email, passwordHash]
     );
 
-    // After successful registration, send user to login page
-    res.redirect("/login.html");
+    // After successful registration, send user to login page with success message
+    res.redirect("/login.html?success=registered");
   } catch (error) {
-    // If email already exists, MySQL gives duplicate entry error
+    // If email already exists, send user back with email exists message
     if (error.code === "ER_DUP_ENTRY") {
-      return res.status(409).send(`
-        <p>This email is already registered.</p>
-        <a href="/login.html">Login here</a>
-      `);
+      return res.redirect("/register.html?error=email_exists");
     }
 
-    // Print unexpected error in terminal
+    // Show real error in terminal for developer
     console.error(error);
 
-    // Show simple error in browser
-    res.status(500).send(`
-      <p>Something went wrong during registration.</p>
-      <a href="/register.html">Go back</a>
-    `);
+    // Send user back with general error message
+    res.redirect("/register.html?error=server_error");
   }
 });
 
