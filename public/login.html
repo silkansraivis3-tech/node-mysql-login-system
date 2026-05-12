@@ -8,22 +8,23 @@
   <div class="auth-card">
       <h1>Login</h1>
 
-  <form action="/login" method="POST">
-    <label>Email:</label>
-    <br>
-    <input type="email" name="email" required>
-    <br><br>
+  <form class="login-form" action="/login" method="POST">
+    <div class="login-email">
+      <label>Email:</label>
+      <input type="email" name="email" required>
+    </div>
+    <div class="login-pw">
+      <label>Password:</label>
+      <input type="password" name="password" required>
+    </div>
 
-    <label>Password:</label>
-    <br>
-    <input type="password" name="password" required>
-    <br><br>
-
-    <button type="submit">Login</button>
+    <button class="register-login-btn" type="submit">Login</button>
   </form>
-
   <p>No account?</p>
-  <a href="/register.html">Register here</a>
+    <a class="login-register-here" href="/register.html">Register here</a>
+  <div class="return-home">
+    <a class="return-home" href="index.html">Return to homepage</a>
+  </div>
   </div>
 </body>
 </html>
