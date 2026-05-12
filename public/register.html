@@ -7,33 +7,24 @@
 <body>
   <div class="auth-card">
       <h1>Register</h1>
-
-  <form action="/register" method="POST">
+  <form class="register-form" action="/register" method="POST">
+    <div class="register-user-name">
     <label>Username:</label>
-    <br>
     <input type="text" name="username" required>
-    <br><br>
-
+    </div>
+    <div class="register-email">
     <label>Email:</label>
-    <br>
     <input type="email" name="email" required>
-    <br><br>
-
+    </div>
+    <div class="register-password">
     <label>Password:</label>
-    <br>
     <input type="password" name="password" required>
-    <br><br>
-
+    </div>
     <button class="register-login-btn" type="submit">Register</button>
   </form>
-  <br>
   <p>Already have an account?</p>
   <a class="login-register-here" href="/login.html">Login here</a>
-  <br>
-  <br>
-    <div class="return-home">
-    <a href="index.html">Return to homepage</a>
   </div>
-  </div>
+  <a class="return-home" href="index.html">Return to homepage</a>
 </body>
 </html>

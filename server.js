@@ -225,7 +225,7 @@ app.post("/login", async (req, res) => {
       req.session.username = user.username;
 
       // Send logged-in user to dashboard
-      res.redirect("/dashboard");
+      res.redirect("/dashboard"); 
     });
   } catch (error) {
     // Print unexpected error in terminal
